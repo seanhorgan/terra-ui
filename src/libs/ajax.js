@@ -238,6 +238,16 @@ const User = signal => ({
 
   postNpsResponse: async body => {
     return fetchRex('npsResponses/create', _.mergeAll([authOpts(), jsonBody(body), { signal, method: 'POST' }]))
+  },
+
+  getNihStatus: async () => {
+    const res = await fetchOrchestration('api/nih/status', _.merge(authOpts(), { signal }))
+    return res.json()
+  },
+
+  linkNihAccount: async token => {
+    const res = await fetchOrchestration('api/nih/callback', _.mergeAll([authOpts(), jsonBody({ jwt: token }), { signal, method: 'POST' }]))
+    return res.json()
   }
 })
 
@@ -816,6 +826,14 @@ const Martha = signal => ({
 })
 
 
+const Duos = signal => ({
+  getConsent: async orspId => {
+    const res = await fetchOrchestration(`/api/duos/consent/orsp/${orspId}`, _.merge(authOpts(), { signal }))
+    return res.json()
+  }
+})
+
+
 export const Ajax = signal => {
   return {
     User: User(signal),
@@ -827,7 +845,8 @@ export const Ajax = signal => {
     Methods: Methods(signal),
     Jupyter: Jupyter(signal),
     Dockstore: Dockstore(signal),
-    Martha: Martha(signal)
+    Martha: Martha(signal),
+    Duos: Duos(signal)
   }
 }
 
