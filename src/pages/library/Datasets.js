@@ -296,7 +296,7 @@ const topMed = h(Participant, {
 
 const ukb = h(Participant, {
   logo: { src: ukbLogo, alt: `UK Biobank logo`, height: '50%' },
-  title: `UK Biobank`,
+  title: `UK Biobank - Kathiresan Lab Project`,
   description: h(Fragment, [
     link({ href: 'https://www.ukbiobank.ac.uk/', target: '_blank' }, 'UK Biobank'),
     ` is a national and international health resource with unparalleled research opportunities,
